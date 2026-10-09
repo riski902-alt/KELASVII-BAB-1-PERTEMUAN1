@@ -5,49 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informatika Fun! - Dashboard Pembelajaran Interaktif</title>
     
-    <!-- Memuat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    
-    <!-- Memuat Ikon -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
+        /* (CSS Animasi Sebelumnya Tetap Sama) */
         :root {
-            --deep-navy: #14243A;
-            --denim-blue: #426A91;
-            --soft-denim: #6489AE;
-            --soft-green: #A8C9AE;
-            --off-white: #F4F7FA;
-            --pure-white: #FFFFFF;
-            --cyan-accent: #00bcd4;
-            --cyan-light: #e0f7fa;
-            --status-green: #1dd1a1;
-            --glow-cyan: rgba(0, 188, 212, 0.4);
-            --glow-green: rgba(29, 209, 161, 0.4);
+            --deep-navy: #14243A; --denim-blue: #426A91; --soft-denim: #6489AE;
+            --soft-green: #A8C9AE; --off-white: #F4F7FA; --pure-white: #FFFFFF;
+            --cyan-accent: #00bcd4; --cyan-light: #e0f7fa; --status-green: #1dd1a1;
+            --glow-cyan: rgba(0, 188, 212, 0.4); --glow-green: rgba(29, 209, 161, 0.4);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--off-white);
-            color: var(--deep-navy);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden; 
-        }
-
+        body { background-color: var(--off-white); color: var(--deep-navy); font-family: 'Inter', sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
         .menu-title, .user-name, .btn-action { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        /* 1. HEADER */
-        .top-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 4%; background: var(--pure-white);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            flex-shrink: 0; z-index: 10;
-        }
+        .top-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 4%; background: var(--pure-white); border-bottom: 1px solid rgba(0, 0, 0, 0.05); flex-shrink: 0; z-index: 10; }
         .logo-area { display: flex; align-items: center; gap: 10px; }
         .logo-icon { font-size: 1.8rem; color: var(--denim-blue); transition: transform 0.3s ease; }
         .logo-area:hover .logo-icon { transform: rotate(15deg) scale(1.1); }
@@ -55,213 +29,86 @@
         .tagline { font-size: 0.7rem; color: var(--soft-denim); }
         .user-profile { display: flex; align-items: center; gap: 12px; }
         .user-info { display: flex; align-items: center; gap: 6px; }
-        .status-dot { 
-            width: 8px; height: 8px; background-color: var(--status-green); border-radius: 50%; 
-            box-shadow: 0 0 8px var(--status-green);
-            animation: pulseDot 2s infinite ease-in-out;
-        }
+        .status-dot { width: 8px; height: 8px; background-color: var(--status-green); border-radius: 50%; box-shadow: 0 0 8px var(--status-green); animation: pulseDot 2s infinite ease-in-out; }
         .btn-profile { background: none; border: none; color: var(--deep-navy); font-size: 1.4rem; cursor: pointer; transition: transform 0.2s ease; }
-        .btn-profile:hover { transform: scale(1.15) rotate(10deg); }
 
-        /* 2. JUDUL HALAMAN (KOTAK HERO) */
-        .page-title-section {
-            background: var(--deep-navy);
-            margin: 15px 4%;
-            padding: 3vh 32px;
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 8px 20px rgba(20, 36, 58, 0.15);
-            z-index: 8;
-            flex-shrink: 0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .page-title-section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(20, 36, 58, 0.22);
-        }
+        .page-title-section { background: var(--deep-navy); margin: 15px 4%; padding: 3vh 32px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 20px rgba(20, 36, 58, 0.15); z-index: 8; flex-shrink: 0; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .page-title-content { display: flex; flex-direction: column; gap: 8px; }
-        .page-title-section .badge-jp { 
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.15); 
-            padding: 6px 14px; border-radius: 20px; 
-            font-size: 0.75rem; color: var(--pure-white); font-weight: bold; 
-            backdrop-filter: blur(4px);
-        }
+        .page-title-section .badge-jp { align-self: flex-start; background: rgba(255, 255, 255, 0.15); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; color: var(--pure-white); font-weight: bold; backdrop-filter: blur(4px); }
         .chapter-title { font-size: 1.6rem; color: var(--pure-white); line-height: 1.2; }
         .meeting-title { font-size: 1rem; color: var(--soft-green); font-weight: 500; }
-        .hero-icon { 
-            font-size: 4.5rem; color: var(--soft-green); opacity: 0.9; 
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .page-title-section:hover .hero-icon { transform: scale(1.1) rotate(-8deg); }
+        .hero-icon { font-size: 4.5rem; color: var(--soft-green); opacity: 0.9; transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-        @media (max-width: 768px) {
-            .page-title-section { padding: 24px; margin: 10px 4%; }
-            .hero-icon { display: none; }
-            .chapter-title { font-size: 1.3rem; }
-        }
-
-        /* 3. NAVIGASI MENU BARIS HORIZONTAL */
-        .nav-container {
-            background: var(--pure-white);
-            padding: 10px 2%;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            flex-shrink: 0; z-index: 5;
-        }
-        .menu-row {
-            display: flex; flex-direction: row; flex-wrap: nowrap; 
-            gap: 6px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px;
-        }
+        .nav-container { background: var(--pure-white); padding: 10px 2%; border-bottom: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 4px 15px rgba(0,0,0,0.02); flex-shrink: 0; z-index: 5; }
+        .menu-row { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 6px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px; }
         .menu-row::-webkit-scrollbar { display: none; }
 
-        /* GAYA TOMBOL MENU DENGAN EFEK INTERAKTIF */
-        .tab-button {
-            position: relative;
-            background: var(--pure-white); color: var(--denim-blue);
-            border: 2px solid var(--denim-blue); border-radius: 12px; 
-            padding: 8px 10px;
-            display: flex; align-items: center; gap: 6px;
-            flex: 1; min-width: fit-content; cursor: pointer;
-            overflow: hidden; /* Menahan ripple effect */
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap; justify-content: center;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Hover desktop */
-        .tab-button:hover {
-            background: var(--off-white);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(66, 106, 145, 0.18);
-        }
-
-        /* Press effect saat diklik */
-        .tab-button:active {
-            transform: translateY(1px) scale(0.96);
-            box-shadow: 0 2px 6px rgba(66, 106, 145, 0.12);
-        }
-
+        .tab-button { position: relative; background: var(--pure-white); color: var(--denim-blue); border: 2px solid var(--denim-blue); border-radius: 12px; padding: 8px 10px; display: flex; align-items: center; gap: 6px; flex: 1; min-width: fit-content; cursor: pointer; overflow: hidden; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; justify-content: center; user-select: none; }
+        .tab-button:hover { background: var(--off-white); transform: translateY(-3px); box-shadow: 0 6px 14px rgba(66, 106, 145, 0.18); }
+        .tab-button:active { transform: translateY(1px) scale(0.96); box-shadow: 0 2px 6px rgba(66, 106, 145, 0.12); }
         .menu-icon { font-size: 1.12rem; transition: transform 0.3s ease, color 0.3s ease; }
         .menu-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2px; }
         .status-indicator { margin-left: 4px; font-size: 0.95rem; transition: transform 0.3s ease; }
 
-        /* MIKRO-INTERAKSI IKON KHUSUS SETIAP MENU SAAT HOVER */
-        .tab-button[data-target="atp"]:hover .menu-icon { animation: animTarget 0.5s ease; }
-        .tab-button[data-target="asesmen-awal"]:hover .menu-icon { animation: animShake 0.4s ease; }
-        .tab-button[data-target="pertanyaan-esensial"]:hover .menu-icon { animation: animTilt 0.4s ease; }
-        .tab-button[data-target="eksplorasi-konsep"]:hover .menu-icon { animation: animRaise 0.4s ease; }
-        .tab-button[data-target="for-learning"]:hover .menu-icon { animation: animGlow 0.5s ease; }
-        .tab-button[data-target="penerapan-konsep"]:hover .menu-icon { animation: animRotate 0.5s ease; }
-        .tab-button[data-target="as-learning"]:hover .menu-icon { animation: animPulse 0.6s ease infinite; }
+        .tab-button.status-progress { background: var(--cyan-light); color: var(--deep-navy); border-color: var(--cyan-accent); box-shadow: 0 0 10px var(--glow-cyan); }
+        .tab-button.status-progress .menu-icon, .tab-button.status-progress .status-indicator { color: var(--cyan-accent); }
+        .tab-button.status-completed { background: var(--soft-green); color: var(--deep-navy); border-color: var(--soft-green); box-shadow: 0 4px 12px var(--glow-green); }
+        .tab-button.status-completed .menu-icon, .tab-button.status-completed .status-indicator { color: var(--deep-navy); }
 
-        /* STATUS MENU: SEDANG DIKERJAKAN (CYAN) */
-        .tab-button.status-progress {
-            background: var(--cyan-light);
-            color: var(--deep-navy);
-            border-color: var(--cyan-accent);
-            box-shadow: 0 0 10px var(--glow-cyan);
-        }
-        .tab-button.status-progress .menu-icon, 
-        .tab-button.status-progress .status-indicator { color: var(--cyan-accent); }
+        .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.6); transform: scale(0); animation: rippleAnim 0.55s linear; pointer-events: none; }
 
-        /* STATUS MENU: SELESAI (HIJAU LEMBUT) */
-        .tab-button.status-completed {
-            background: var(--soft-green);
-            color: var(--deep-navy);
-            border-color: var(--soft-green);
-            box-shadow: 0 4px 12px var(--glow-green);
-        }
-        .tab-button.status-completed .menu-icon, 
-        .tab-button.status-completed .status-indicator { 
-            color: var(--deep-navy); 
-            animation: popCheck 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* GELOMBANG RIPPLE EFFECT */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            transform: scale(0);
-            animation: rippleAnim 0.55s linear;
-            pointer-events: none;
-        }
-
-        /* 4. AREA KONTEN UTAMA */
         .main-content-area { flex: 1; padding: 24px 4%; overflow-y: auto; background: var(--off-white); }
-        .tab-pane { 
-            display: none; 
-            max-width: 1400px; margin: 0 auto; 
-        }
-        
-        .tab-pane.active { 
-            display: block; 
-            animation: contentSlideUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .tab-pane { display: none; max-width: 1400px; margin: 0 auto; }
+        .tab-pane.active { display: block; animation: contentSlideUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        .content-card {
-            background: var(--pure-white); border-radius: 20px;
-            padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.04);
-            border: 1px solid rgba(0, 0, 0, 0.05); margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
+        .content-card { background: var(--pure-white); border-radius: 20px; padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.04); border: 1px solid rgba(0, 0, 0, 0.05); margin-bottom: 20px; transition: transform 0.3s ease; }
+        .btn-action { position: relative; background: var(--denim-blue); color: var(--pure-white); border: none; padding: 12px 26px; border-radius: 12px; font-weight: 600; font-size: 0.9rem; cursor: pointer; overflow: hidden; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; box-shadow: 0 4px 12px rgba(66, 106, 145, 0.25); user-select: none; }
+        .btn-action:hover { background: var(--deep-navy); transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 16px rgba(20, 36, 58, 0.3); }
+        .btn-action.success { background: var(--status-green); color: var(--deep-navy); pointer-events: none; box-shadow: 0 4px 15px var(--glow-green); }
 
-        /* TOMBOL AKSI DALAM KONTEN */
-        .btn-action {
-            position: relative;
-            background: var(--denim-blue); color: var(--pure-white);
-            border: none; padding: 12px 26px; border-radius: 12px;
-            font-weight: 600; font-size: 0.9rem; cursor: pointer;
-            overflow: hidden;
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
-            box-shadow: 0 4px 12px rgba(66, 106, 145, 0.25);
-            user-select: none;
-        }
-        .btn-action:hover { 
-            background: var(--deep-navy); 
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 6px 16px rgba(20, 36, 58, 0.3);
-        }
-        .btn-action:active { transform: translateY(1px) scale(0.97); }
-        
-        .btn-action.success { 
-            background: var(--status-green); 
-            color: var(--deep-navy);
-            pointer-events: none; 
-            box-shadow: 0 4px 15px var(--glow-green);
-            animation: successBounce 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* KEYFRAMES & ANIMASI */
         @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
         @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
         @keyframes contentSlideUp { from { opacity: 0; transform: translateY(16px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes popCheck { 0% { transform: scale(0) rotate(-45deg); } 70% { transform: scale(1.3) rotate(10deg); } 100% { transform: scale(1) rotate(0deg); } }
-        @keyframes successBounce { 0% { transform: scale(0.9); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
 
-        /* MIKRO-ANIMASI IKON MENU */
-        @keyframes animTarget { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
-        @keyframes animShake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
-        @keyframes animTilt { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg) scale(1.15); } }
-        @keyframes animRaise { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-        @keyframes animGlow { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.25); } }
-        @keyframes animRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(180deg); } }
-        @keyframes animPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-
-        /* MENGHORMATI OPSI REDUCED MOTION AKSESIBILITAS */
-        @media (prefers-reduced-motion: reduce) {
-            *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        /* --- CSS BARU UNTUK MODAL LOGIN --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(20, 36, 58, 0.8); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; transition: opacity 0.3s;
         }
+        .modal-box {
+            background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px;
+            text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: contentSlideUp 0.4s ease forwards;
+        }
+        .modal-box input {
+            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc;
+            border-radius: 8px; font-size: 1rem; font-family: 'Inter', sans-serif;
+        }
+        .btn-login {
+            background: var(--denim-blue); color: white; width: 100%; padding: 12px;
+            border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px;
+        }
+        .btn-login:hover { background: var(--deep-navy); }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
     
-    <!-- 1. HEADER -->
+    <!-- MODAL LOGIN -->
+    <div id="login-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <i class="ph-duotone ph-student" style="font-size: 4rem; color: var(--denim-blue);"></i>
+            <h2 style="margin-bottom: 5px;">Selamat Datang!</h2>
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">Silakan isi data diri untuk mulai belajar.</p>
+            <input type="text" id="input-nama" placeholder="Nama Lengkap" required>
+            <input type="text" id="input-nisn" placeholder="NISN" required>
+            <button id="btn-login" class="btn-login">Mulai Belajar</button>
+        </div>
+    </div>
+
+    <!-- HEADER -->
     <header class="top-header">
         <div class="logo-area">
             <i class="ph-fill ph-code-block logo-icon"></i>
@@ -273,13 +120,13 @@
         <div class="user-profile">
             <div class="user-info">
                 <span class="status-dot"></span>
-                <span id="user-name" class="user-name">Siswa Kreatif</span>
+                <span id="user-name" class="user-name">Siswa</span>
             </div>
             <button class="btn-profile" title="Profil Siswa"><i class="ph ph-user-circle"></i></button>
         </div>
     </header>
 
-    <!-- 2. JUDUL HALAMAN KOTAK -->
+    <!-- JUDUL HALAMAN KOTAK -->
     <section class="page-title-section">
         <div class="page-title-content">
             <div class="badge-jp"><i class="ph ph-clock"></i> JP: 120 MENIT</div>
@@ -289,20 +136,82 @@
         <i class="ph-duotone ph-database hero-icon"></i>
     </section>
 
-    <!-- 3. MENU NAVIGASI HORIZONTAL -->
+    <!-- MENU NAVIGASI HORIZONTAL -->
     <nav class="nav-container">
         <div id="menu-row" class="menu-row"></div>
     </nav>
 
-    <!-- 4. AREA KONTEN UTAMA -->
+    <!-- AREA KONTEN UTAMA -->
     <main class="main-content-area">
         <div id="content-container"></div>
     </main>
 
-    <script>
-        const currentUser = "SiswaKreatif_Kelas7A";
-        const storageKey = `progress_Informatika_${currentUser}`;
+    <!-- Script JavaScript (Sekarang menggunakan module untuk Firebase) -->
+    <script type="module">
+        // 1. IMPORT FIREBASE DARI CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 
+        // 2. KONFIGURASI FIREBASE (Dari gambar yang kamu berikan)
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7bt1JBOXkh81nYk8sVkuFpSmuJ3kOj94", //[cite: 5]
+            authDomain: "databasemateriinformatika.firebaseapp.com", //[cite: 5]
+            projectId: "databasemateriinformatika", //[cite: 5]
+            storageBucket: "databasemateriinformatika.firebasestorage.app", //[cite: 5]
+            messagingSenderId: "961327810612", //[cite: 5]
+            appId: "1:961327810612:web:48e952f20159a5b932e261" //[cite: 5]
+        };
+
+        // Inisialisasi Firebase & Firestore
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // ==========================================
+        // LOGIKA LOGIN & USER DATA
+        // ==========================================
+        const loginModal = document.getElementById('login-modal');
+        const btnLogin = document.getElementById('btn-login');
+        const userNameDisplay = document.getElementById('user-name');
+        
+        let currentUser = localStorage.getItem('infoFun_Nama');
+        let currentNISN = localStorage.getItem('infoFun_NISN');
+        let storageKey = `progress_Informatika_${currentNISN}`;
+        let userProgress = {};
+
+        // Cek apakah siswa sudah login sebelumnya
+        if (!currentUser || !currentNISN) {
+            loginModal.classList.remove('hidden'); // Tampilkan modal
+        } else {
+            userNameDisplay.textContent = currentUser; // Tampilkan nama
+            mulaiAplikasi();
+        }
+
+        // Proses Tombol Login
+        btnLogin.addEventListener('click', () => {
+            const inputNama = document.getElementById('input-nama').value.trim();
+            const inputNisn = document.getElementById('input-nisn').value.trim();
+
+            if (inputNama !== "" && inputNisn !== "") {
+                // Simpan ke localStorage
+                localStorage.setItem('infoFun_Nama', inputNama);
+                localStorage.setItem('infoFun_NISN', inputNisn);
+                
+                currentUser = inputNama;
+                currentNISN = inputNisn;
+                storageKey = `progress_Informatika_${currentNISN}`;
+                
+                userNameDisplay.textContent = currentUser;
+                loginModal.classList.add('hidden'); // Sembunyikan modal
+                mulaiAplikasi(); // Render menu
+            } else {
+                alert("Harap isi Nama dan NISN dengan lengkap!");
+            }
+        });
+
+
+        // ==========================================
+        // LOGIKA APLIKASI (Menu & Firebase Save)
+        // ==========================================
         const learningMenus = [
             { id: "atp", title: "ATP", icon: "ph-target", type: "read" },
             { id: "asesmen-awal", title: "ASESMEN AWAL", icon: "ph-clipboard-text", type: "task" },
@@ -313,9 +222,8 @@
             { id: "as-learning", title: "AS LEARNING", icon: "ph-brain", type: "task" }
         ];
 
-        let userProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
-
-        function initApp() {
+        function mulaiAplikasi() {
+            userProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
             const menuContainer = document.getElementById("menu-row");
             const contentContainer = document.getElementById("content-container");
             
@@ -325,50 +233,42 @@
             learningMenus.forEach((menu) => {
                 const currentStatus = userProgress[menu.id] || "unstarted";
 
-                // Membuat Tombol Tab Menu
+                // Buat Tab
                 const btn = document.createElement("button");
                 btn.id = `btn-${menu.id}`;
                 btn.className = "tab-button";
                 btn.dataset.target = menu.id;
-                
                 updateButtonVisuals(btn, menu, currentStatus);
 
-                // Efek Ripple Efek Saat Diklik/Disentuh
-                btn.addEventListener("click", function(e) {
-                    createRipple(e, this);
-                });
+                // Efek Ripple
+                btn.addEventListener("click", function(e) { createRipple(e, this); });
 
-                // Membuat Panel Konten
+                // Buat Konten
                 const pane = document.createElement("div");
                 pane.id = `pane-${menu.id}`;
                 pane.className = "tab-pane";
-                
                 let actionButtonText = menu.type === "read" ? "Tandai Selesai Dibaca" : "Kirim Jawaban Tugas";
                 
                 pane.innerHTML = `
                     <div class="content-card">
                         <i class="ph-duotone ${menu.icon}" style="font-size: 3rem; color: var(--denim-blue); margin-bottom: 12px; display: inline-block;"></i>
-                        <h2>Area Pembelajaran: ${menu.title}</h2>
-                        <p style="margin-top: 12px; color: #555; line-height: 1.6;">
-                            Selamat datang di bagian <strong>${menu.title}</strong>. Ruang konten ini siap diisi dengan materi pembelajaran, modul, video interaktif, maupun formulir kuis online.
-                        </p>
+                        <h2>${menu.title}</h2>
+                        <p style="margin-top: 12px; color: #555;">Ruang konten ini siap diisi dengan materi.</p>
                         <br>
                         <button id="action-${menu.id}" class="btn-action ${currentStatus === 'completed' ? 'success' : ''}">
                             <i class="ph-bold ${currentStatus === 'completed' ? 'ph-check' : 'ph-paper-plane-right'}"></i> 
-                            ${currentStatus === 'completed' ? 'Selesai Dikerjakan' : actionButtonText}
+                            <span class="btn-text">${currentStatus === 'completed' ? 'Selesai Dikerjakan' : actionButtonText}</span>
                         </button>
                     </div>
                 `;
 
-                // Navigasi Tab & Pembaruan Status Realtime
+                // Logika Klik Menu
                 btn.addEventListener("click", () => {
                     document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active-tab"));
                     document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
-                    
                     btn.classList.add("active-tab");
                     document.getElementById(`pane-${menu.id}`).classList.add("active");
 
-                    // Ubah status ke progress jika baru pertama dibuka
                     if ((userProgress[menu.id] || "unstarted") === "unstarted") {
                         saveProgress(menu.id, "progress");
                         updateButtonVisuals(btn, menu, "progress");
@@ -378,68 +278,72 @@
                 menuContainer.appendChild(btn);
                 contentContainer.appendChild(pane);
 
-                // Penanganan Tombol Aksi Selesai/Kirim
+                // --- BAGIAN INI UNTUK MENGIRIM DATA KE FIREBASE ---
                 const actionBtn = document.getElementById(`action-${menu.id}`);
-                actionBtn.addEventListener("click", function(e) {
+                actionBtn.addEventListener("click", async function(e) {
                     createRipple(e, this);
-                    this.classList.add("success");
-                    this.innerHTML = `<i class="ph-bold ph-check"></i> Selesai Dikerjakan`;
                     
-                    saveProgress(menu.id, "completed");
-                    updateButtonVisuals(btn, menu, "completed");
+                    // Ubah teks sementara jadi loading
+                    const btnText = this.querySelector('.btn-text');
+                    const originalText = btnText.innerText;
+                    btnText.innerText = "Mengirim...";
+
+                    try {
+                        // Perintah menyimpan ke Firestore Database
+                        await addDoc(collection(db, "pengumpulan_tugas"), {
+                            namaSiswa: currentUser,
+                            nisnSiswa: currentNISN,
+                            menuDikerjakan: menu.title,
+                            waktuPengumpulan: serverTimestamp()
+                        });
+
+                        // Jika berhasil simpan, ubah tampilan tombol
+                        this.classList.add("success");
+                        this.innerHTML = `<i class="ph-bold ph-check"></i> <span class="btn-text">Tersimpan di Database!</span>`;
+                        
+                        saveProgress(menu.id, "completed");
+                        updateButtonVisuals(btn, menu, "completed");
+
+                    } catch (error) {
+                        console.error("Error menambah dokumen: ", error);
+                        alert("Gagal mengirim tugas. Pastikan internet menyala dan database Firebase sudah diatur 'Test Mode'.");
+                        btnText.innerText = originalText; // kembalikan teks jika gagal
+                    }
                 });
             });
 
-            // Otomatis buka tab pertama saat aplikasi dimuat
+            // Otomatis klik menu pertama
             const firstButton = document.getElementById(`btn-${learningMenus[0].id}`);
             if(firstButton) firstButton.click();
         }
 
-        // Efek Ripple
+        // Fungsi Bantuan Visual (Ripple, dll)
         function createRipple(event, element) {
             const circle = document.createElement("span");
             const diameter = Math.max(element.clientWidth, element.clientHeight);
             const radius = diameter / 2;
             const rect = element.getBoundingClientRect();
-
             circle.style.width = circle.style.height = `${diameter}px`;
             circle.style.left = `${event.clientX - rect.left - radius}px`;
             circle.style.top = `${event.clientY - rect.top - radius}px`;
             circle.classList.add("ripple");
-
             const ripple = element.getElementsByClassName("ripple")[0];
             if (ripple) ripple.remove();
-
             element.appendChild(circle);
         }
 
-        // Fungsi Pembaru Visual Tombol secara Realtime
         function updateButtonVisuals(btn, menu, status) {
             btn.classList.remove("status-progress", "status-completed");
             let statusIcon = "ph-circle"; 
-            
-            if (status === "progress") {
-                btn.classList.add("status-progress");
-                statusIcon = "ph-spinner-gap ph-spin"; 
-            } else if (status === "completed") {
-                btn.classList.add("status-completed");
-                statusIcon = "ph-check-circle"; 
-            }
-
-            btn.innerHTML = `
-                <i class="ph-duotone ${menu.icon} menu-icon"></i>
-                <span class="menu-title">${menu.title}</span>
-                <i class="ph-bold ${statusIcon} status-indicator"></i>
-            `;
+            if (status === "progress") { btn.classList.add("status-progress"); statusIcon = "ph-spinner-gap ph-spin"; } 
+            else if (status === "completed") { btn.classList.add("status-completed"); statusIcon = "ph-check-circle"; }
+            btn.innerHTML = `<i class="ph-duotone ${menu.icon} menu-icon"></i> <span class="menu-title">${menu.title}</span> <i class="ph-bold ${statusIcon} status-indicator"></i>`;
         }
 
-        // Fungsi Simpan ke LocalStorage
         function saveProgress(menuId, status) {
             userProgress[menuId] = status;
             localStorage.setItem(storageKey, JSON.stringify(userProgress));
         }
-
-        document.addEventListener("DOMContentLoaded", initApp);
     </script>
 </body>
 </html>
