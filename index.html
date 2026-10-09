@@ -32,9 +32,7 @@
         .menu-title, .user-name, .btn-action { font-family: 'Plus Jakarta Sans', sans-serif; }
         .hidden { display: none !important; }
 
-        /* =========================================
-           STYLE HALAMAN LOGIN
-           ========================================= */
+        /* STYLE HALAMAN LOGIN */
         #login-container {
             background: linear-gradient(135deg, #F7FBFF 0%, #AFC9D8 50%, #B7D8C8 100%);
             min-height: 100vh;
@@ -85,7 +83,7 @@
         .btn-login-submit { width: 100%; height: 46px; background: #527F9B; color: #ffffff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.2s; }
         .btn-login-submit:hover { background: #477FA0; }
         
-        .status-message { font-size: 13px; font-weight: 600; padding: 10px; border-radius: 8px; display: none; margin-top: 12px; }
+        .status-message { font-size: 13px; font-weight: 600; padding: 10px; border-radius: 8px; display: none; margin-top: 12px; word-break: break-word; }
         .status-error { background: #FEE2E2; color: #e63946; }
         .status-success { background: #D1FAE5; color: #2a9d8f; }
         
@@ -93,16 +91,8 @@
         .footer-title { font-size: 12px; font-weight: 800; color: #314F68; }
         .footer-desc { font-size: 11px; color: #6F91AA; margin-top: 2px; }
 
-        /* =========================================
-           STYLE DASHBOARD UTAMA
-           ========================================= */
-        #dashboard-container {
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
-            width: 100%;
-        }
-
+        /* STYLE DASHBOARD UTAMA */
+        #dashboard-container { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
         .top-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 4%; background: var(--pure-white); border-bottom: 1px solid rgba(0, 0, 0, 0.05); flex-shrink: 0; z-index: 10; }
         .logo-area { display: flex; align-items: center; gap: 10px; }
         .logo-icon { font-size: 1.8rem; color: var(--denim-blue); transition: transform 0.3s ease; }
@@ -124,52 +114,18 @@
         .hero-icon { font-size: 4.5rem; color: var(--soft-green); opacity: 0.9; transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .page-title-section:hover .hero-icon { transform: scale(1.1) rotate(-8deg); }
 
-        /* NAVIGASI MENU HORIZONTAL */
         .nav-container { background: var(--pure-white); padding: 10px 2%; border-bottom: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 4px 15px rgba(0,0,0,0.02); flex-shrink: 0; z-index: 5; }
         .menu-row { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 6px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px; }
         .menu-row::-webkit-scrollbar { display: none; }
 
-        .tab-button { 
-            position: relative; 
-            background: var(--pure-white); 
-            color: var(--denim-blue); 
-            border: 2px solid var(--denim-blue); 
-            border-radius: 12px; 
-            padding: 8px 10px; 
-            display: flex; 
-            align-items: center; 
-            gap: 6px; 
-            flex: 1; 
-            min-width: fit-content; 
-            cursor: pointer; 
-            overflow: hidden; 
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
-            white-space: nowrap; 
-            justify-content: center; 
-            user-select: none; 
-        }
+        .tab-button { position: relative; background: var(--pure-white); color: var(--denim-blue); border: 2px solid var(--denim-blue); border-radius: 12px; padding: 8px 10px; display: flex; align-items: center; gap: 6px; flex: 1; min-width: fit-content; cursor: pointer; overflow: hidden; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; justify-content: center; user-select: none; }
         .tab-button:hover { background: var(--off-white); transform: translateY(-3px); box-shadow: 0 6px 14px rgba(66, 106, 145, 0.18); }
         .tab-button:active { transform: translateY(1px) scale(0.96); box-shadow: 0 2px 6px rgba(66, 106, 145, 0.12); }
         .menu-icon { font-size: 1.12rem; transition: transform 0.3s ease, color 0.3s ease; }
         .menu-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2px; }
         .status-indicator { margin-left: 4px; font-size: 0.95rem; transition: transform 0.3s ease; }
 
-        /* MIKRO-ANIMASI IKON MENU */
-        .tab-button[data-target="atp"]:hover .menu-icon { animation: animTarget 0.5s ease; }
-        .tab-button[data-target="asesmen-awal"]:hover .menu-icon { animation: animShake 0.4s ease; }
-        .tab-button[data-target="pertanyaan-esensial"]:hover .menu-icon { animation: animTilt 0.4s ease; }
-        .tab-button[data-target="eksplorasi-konsep"]:hover .menu-icon { animation: animRaise 0.4s ease; }
-        .tab-button[data-target="for-learning"]:hover .menu-icon { animation: animGlow 0.5s ease; }
-        .tab-button[data-target="penerapan-konsep"]:hover .menu-icon { animation: animRotate 0.5s ease; }
-        .tab-button[data-target="as-learning"]:hover .menu-icon { animation: animPulse 0.6s ease infinite; }
-
-        /* WAKTU STATUS MENU */
-        .tab-button.active-tab {
-            background: var(--deep-navy);
-            color: var(--pure-white);
-            border-color: var(--deep-navy);
-            box-shadow: 0 4px 12px rgba(20, 36, 58, 0.25);
-        }
+        .tab-button.active-tab { background: var(--deep-navy); color: var(--pure-white); border-color: var(--deep-navy); box-shadow: 0 4px 12px rgba(20, 36, 58, 0.25); }
         .tab-button.active-tab .menu-icon { color: var(--soft-green); }
         .tab-button.status-progress { background: var(--cyan-light); color: var(--deep-navy); border-color: var(--cyan-accent); box-shadow: 0 0 10px var(--glow-cyan); }
         .tab-button.status-progress .menu-icon, .tab-button.status-progress .status-indicator { color: var(--cyan-accent); }
@@ -177,7 +133,6 @@
         .tab-button.status-completed .menu-icon, .tab-button.status-completed .status-indicator { color: var(--deep-navy); }
 
         .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.6); transform: scale(0); animation: rippleAnim 0.55s linear; pointer-events: none; }
-
         .main-content-area { flex: 1; padding: 24px 4%; overflow-y: auto; background: var(--off-white); }
         .tab-pane { display: none; max-width: 1400px; margin: 0 auto; }
         .tab-pane.active { display: block; animation: contentSlideUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -187,18 +142,10 @@
         .btn-action:hover { background: var(--deep-navy); transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 16px rgba(20, 36, 58, 0.3); }
         .btn-action.success { background: var(--status-green); color: var(--deep-navy); pointer-events: none; box-shadow: 0 4px 15px var(--glow-green); }
 
-        /* KEYFRAMES */
         @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
         @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
         @keyframes contentSlideUp { from { opacity: 0; transform: translateY(16px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes animTarget { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
-        @keyframes animShake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
-        @keyframes animTilt { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg) scale(1.15); } }
-        @keyframes animRaise { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-        @keyframes animGlow { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.25); } }
-        @keyframes animRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(180deg); } }
-        @keyframes animPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-
+        
         @media (max-width: 768px) {
             .page-title-section { padding: 24px; margin: 10px 4%; }
             .hero-icon { display: none; }
@@ -208,9 +155,7 @@
 </head>
 <body>
     
-    <!-- =========================================
-         1. WADAH LOGIN
-         ========================================= -->
+    <!-- WADAH LOGIN -->
     <div id="login-container">
         <div class="login-card">
             <div class="header-icon">
@@ -222,7 +167,6 @@
             <h1 class="login-title">LOGIN</h1>
             <p class="login-desc">Silakan masuk untuk melanjutkan pembelajaran Informatika.</p>
     
-            <!-- Pilihan Peran -->
             <div class="role-selector">
                 <div class="role-option">
                     <input type="radio" id="roleSiswa" name="userRole" value="siswa" checked>
@@ -234,9 +178,7 @@
                 </div>
             </div>
     
-            <!-- Form Login -->
             <form id="loginForm">
-                <!-- Form Siswa -->
                 <div id="siswaSection" class="form-section active">
                     <div class="input-group">
                         <label for="nama">Nama Lengkap</label>
@@ -248,7 +190,6 @@
                     </div>
                 </div>
     
-                <!-- Form Guru -->
                 <div id="guruSection" class="form-section">
                     <div class="input-group">
                         <label for="email">Email Guru</label>
@@ -271,9 +212,7 @@
         </div>
     </div>
 
-    <!-- =========================================
-         2. WADAH DASHBOARD
-         ========================================= -->
+    <!-- WADAH DASHBOARD -->
     <div id="dashboard-container" class="hidden">
         <header class="top-header">
             <div class="logo-area">
@@ -301,33 +240,28 @@
             <i class="ph-duotone ph-database hero-icon"></i>
         </section>
 
-        <!-- MENU NAVIGASI HORIZONTAL -->
         <nav class="nav-container">
             <div id="menu-row" class="menu-row"></div>
         </nav>
 
-        <!-- AREA KONTEN UTAMA -->
         <main class="main-content-area">
             <div id="content-container"></div>
         </main>
     </div>
 
-    <!-- =========================================
-         SCRIPT JAVASCRIPT & FIREBASE
-         ========================================= -->
+    <!-- SCRIPT FIREBASE & UTAMA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, collection, query, where, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyB7bt1JBOXkh81nYk8sVkuFpSmuJ3kOj94",[cite: 5]
-            authDomain: "databasemateriinformatika.firebaseapp.com",[cite: 5]
-            projectId: "databasemateriinformatika",[cite: 5]
-            storageBucket: "databasemateriinformatika.firebasestorage.app",[cite: 5]
-            messagingSenderId: "961327810612",[cite: 5]
-            appId: "1:961327810612:web:48e952f20159a5b932e261",[cite: 5]
+            apiKey: "AIzaSyB7bt1JBOXkh81nYk8sVkuFpSmuJ3kOj94",[cite: 7]
+            authDomain: "databasemateriinformatika.firebaseapp.com",[cite: 7]
+            projectId: "databasemateriinformatika",[cite: 7]
+            storageBucket: "databasemateriinformatika.firebasestorage.app",[cite: 7]
+            messagingSenderId: "961327810612",[cite: 7]
+            appId: "1:961327810612:web:48e952f20159a5b932e261",[cite: 7]
             measurementId: "G-TDZQZ9L36B"
         };
 
@@ -335,7 +269,6 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // DAFTAR MENU UTAMA (Dideklarasikan di bagian atas agar siap digunakan)
         const learningMenus = [
             { id: "atp", title: "ATP", icon: "ph-target", type: "read" },
             { id: "asesmen-awal", title: "ASESMEN AWAL", icon: "ph-clipboard-text", type: "task" },
@@ -346,7 +279,6 @@
             { id: "as-learning", title: "AS LEARNING", icon: "ph-brain", type: "task" }
         ];
 
-        // Variabel Global
         let currentUser = localStorage.getItem('infoFun_Nama');
         let currentNISN = localStorage.getItem('infoFun_NISN');
         let storageKey = currentNISN ? `progress_Informatika_${currentNISN}` : '';
@@ -356,9 +288,6 @@
         const dashboardContainer = document.getElementById('dashboard-container');
         const userNameDisplay = document.getElementById('user-name');
 
-        // =========================================
-        // FUNGSI BANTUAN VISUAL & PROGRES
-        // =========================================
         function createRipple(event, element) {
             const circle = document.createElement("span");
             const diameter = Math.max(element.clientWidth, element.clientHeight);
@@ -391,9 +320,6 @@
             localStorage.setItem(storageKey, JSON.stringify(userProgress));
         }
 
-        // =========================================
-        // MEMULAI APLIKASI & RENDER MENU
-        // =========================================
         function mulaiAplikasi() {
             userProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
             const menuContainer = document.getElementById("menu-row");
@@ -407,7 +333,6 @@
             learningMenus.forEach((menu) => {
                 const currentStatus = userProgress[menu.id] || "unstarted";
 
-                // Membikin Tombol Tab
                 const btn = document.createElement("button");
                 btn.id = `btn-${menu.id}`;
                 btn.className = "tab-button";
@@ -416,7 +341,6 @@
 
                 btn.addEventListener("click", function(e) { createRipple(e, this); });
 
-                // Membikin Panel Konten
                 const pane = document.createElement("div");
                 pane.id = `pane-${menu.id}`;
                 pane.className = "tab-pane";
@@ -435,7 +359,6 @@
                     </div>
                 `;
 
-                // Event Listener Klik Tab
                 btn.addEventListener("click", () => {
                     document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active-tab"));
                     document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
@@ -451,7 +374,6 @@
                 menuContainer.appendChild(btn);
                 contentContainer.appendChild(pane);
 
-                // Event Listener Kirim Tugas ke Firebase
                 const actionBtn = document.getElementById(`action-${menu.id}`);
                 actionBtn.addEventListener("click", async function(e) {
                     createRipple(e, this);
@@ -476,18 +398,16 @@
 
                     } catch (error) {
                         console.error("Error menambah dokumen: ", error);
-                        alert("Gagal mengirim tugas. Pastikan internet menyala dan database Firebase sudah diatur 'Test Mode'.");
+                        alert("Gagal mengirim tugas: " + error.message);
                         btnText.innerText = originalText; 
                     }
                 });
             });
 
-            // Klik otomatis menu pertama (ATP)
             const firstButton = document.getElementById(`btn-${learningMenus[0].id}`);
             if (firstButton) firstButton.click();
         }
 
-        // Cek Login Otomatis saat web dimuat
         if (currentUser && currentNISN) {
             loginContainer.classList.add('hidden');
             dashboardContainer.classList.remove('hidden');
@@ -495,9 +415,6 @@
             mulaiAplikasi();
         }
 
-        // =========================================
-        // LOGIKA INTERAKSI LOGIN FORM
-        // =========================================
         const roleInputs = document.querySelectorAll('input[name="userRole"]');
         const siswaSection = document.getElementById('siswaSection');
         const guruSection = document.getElementById('guruSection');
@@ -539,23 +456,40 @@
                 showStatus('Memeriksa data siswa ke database...', 'success');
 
                 try {
-                    let q = query(collection(db, "siswa"), where("NISN", "==", nisnInput));
-                    let querySnapshot = await getDocs(q);
+                    // Pencarian Serbaguna (NISN sebagai Teks & Angka, serta 'NISN' & 'nisn')
+                    let docs = [];
+                    const nisnStr = nisnInput;
+                    const nisnNum = Number(nisnInput);
 
-                    if (querySnapshot.empty) {
-                        const nisnAngka = Number(nisnInput);
-                        q = query(collection(db, "siswa"), where("NISN", "==", nisnAngka));
-                        querySnapshot = await getDocs(q);
+                    let q1 = query(collection(db, "siswa"), where("NISN", "==", nisnStr));
+                    let snap1 = await getDocs(q1);
+                    snap1.forEach(d => docs.push(d.data()));
+
+                    if (docs.length === 0 && !isNaN(nisnNum)) {
+                        let q2 = query(collection(db, "siswa"), where("NISN", "==", nisnNum));
+                        let snap2 = await getDocs(q2);
+                        snap2.forEach(d => docs.push(d.data()));
                     }
 
-                    if (querySnapshot.empty) {
-                        showStatus('NISN tidak terdaftar di database.', 'error');
+                    if (docs.length === 0) {
+                        let q3 = query(collection(db, "siswa"), where("nisn", "==", nisnStr));
+                        let snap3 = await getDocs(q3);
+                        snap3.forEach(d => docs.push(d.data()));
+                    }
+
+                    if (docs.length === 0 && !isNaN(nisnNum)) {
+                        let q4 = query(collection(db, "siswa"), where("nisn", "==", nisnNum));
+                        let snap4 = await getDocs(q4);
+                        snap4.forEach(d => docs.push(d.data()));
+                    }
+
+                    if (docs.length === 0) {
+                        showStatus('NISN tidak ditemukan di koleksi "siswa".', 'error');
                         return;
                     }
 
                     let siswaCocok = false;
-                    querySnapshot.forEach((doc) => {
-                        const data = doc.data();
+                    docs.forEach((data) => {
                         for (let kolom in data) {
                             let namaKolomBersih = kolom.trim().toLowerCase().replace(/_/g, "");
                             if (namaKolomBersih.includes("nama")) {
@@ -590,7 +524,7 @@
 
                 } catch (error) {
                     console.error("Error Database:", error);
-                    showStatus('Terjadi kesalahan koneksi database.', 'error');
+                    showStatus('Kendala Firebase: ' + error.message, 'error');
                 }
 
             } else {
@@ -610,8 +544,8 @@
                         window.location.href = "https://riski902-alt.github.io/TOMBOL-PILIH-KELAS/"; 
                     }, 1000);
                 })
-                .catch(() => {
-                    showStatus('Email atau password guru salah.', 'error');
+                .catch((error) => {
+                    showStatus('Login Guru gagal: ' + error.message, 'error');
                 });
             }
         });
