@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informatika Fun! - Dashboard Pembelajaran</title>
+    <title>Informatika Fun! - Dashboard Pembelajaran Interaktif</title>
     
     <!-- Memuat Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <!-- Memuat Ikon -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -19,307 +19,424 @@
             --soft-green: #A8C9AE;
             --off-white: #F4F7FA;
             --pure-white: #FFFFFF;
-            --muted-blue: #B5C2D0;
-            
-            --status-red: #ff6b6b;
-            --status-yellow: #feca57;
+            --cyan-accent: #00bcd4;
+            --cyan-light: #e0f7fa;
             --status-green: #1dd1a1;
+            --glow-cyan: rgba(0, 188, 212, 0.4);
+            --glow-green: rgba(29, 209, 161, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* PENGATURAN 1 LAYAR PENUH (TANPA SCROLL) */
         body {
-            background-color: var(--pure-white);
+            background-color: var(--off-white);
             color: var(--deep-navy);
             font-family: 'Inter', sans-serif;
-            height: 100vh;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
+            height: 100vh;
+            overflow: hidden; 
         }
 
-        h1, h2, .badge-jp, .progress-percentage { font-family: 'Space Grotesk', sans-serif; }
-        h3, .menu-title, .user-name { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+        .menu-title, .user-name, .btn-action { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        /* Header */
+        /* 1. HEADER */
         .top-header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 2vh 5%;
-            background: var(--pure-white);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 10px 4%; background: var(--pure-white);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            flex-shrink: 0; z-index: 10;
         }
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { font-size: 2rem; color: var(--denim-blue); }
-        .logo-area h1 { font-size: 1.2rem; font-weight: 700; color: var(--deep-navy); }
-        .tagline { font-size: 0.75rem; color: var(--soft-denim); }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { font-size: 1.8rem; color: var(--denim-blue); transition: transform 0.3s ease; }
+        .logo-area:hover .logo-icon { transform: rotate(15deg) scale(1.1); }
+        .logo-area h1 { font-size: 1.1rem; font-weight: 700; color: var(--deep-navy); margin-bottom: 2px; }
+        .tagline { font-size: 0.7rem; color: var(--soft-denim); }
+        .user-profile { display: flex; align-items: center; gap: 12px; }
+        .user-info { display: flex; align-items: center; gap: 6px; }
+        .status-dot { 
+            width: 8px; height: 8px; background-color: var(--status-green); border-radius: 50%; 
+            box-shadow: 0 0 8px var(--status-green);
+            animation: pulseDot 2s infinite ease-in-out;
+        }
+        .btn-profile { background: none; border: none; color: var(--deep-navy); font-size: 1.4rem; cursor: pointer; transition: transform 0.2s ease; }
+        .btn-profile:hover { transform: scale(1.15) rotate(10deg); }
 
-        .user-profile { display: flex; align-items: center; gap: 16px; }
-        .user-info { display: flex; align-items: center; gap: 8px; }
-        .status-dot { width: 8px; height: 8px; background-color: var(--status-green); border-radius: 50%; }
-        .btn-profile { background: none; border: none; color: var(--deep-navy); font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
-        .btn-profile:hover { color: var(--denim-blue); transform: scale(1.1); }
-
-        /* Wadah Utama Fleksibel */
-        .dashboard-container { 
-            padding: 1vh 5%; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            flex: 1; 
-            width: 100%; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        /* Hero Section (Kotak BAB I telah diubah menjadi gelap) */
-        .hero-section {
-            background: var(--deep-navy); 
-            border-radius: 20px; 
-            padding: 3vh 32px;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 8px 20px rgba(20, 36, 58, 0.15); 
-        }
-        
-        .badge-jp { 
-            display: inline-flex; align-items: center; gap: 6px; 
-            background: rgba(255, 255, 255, 0.15); 
-            padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; 
-            color: var(--pure-white); 
-            margin-bottom: 1vh; font-weight: bold; 
-        }
-        
-        .hero-title { 
-            font-size: 1.8rem; line-height: 1.2; 
-            color: var(--pure-white); 
-        }
-        
-        .hero-icon { 
-            font-size: 5rem; 
-            color: var(--soft-green); 
-            opacity: 0.9; 
-        }
-
-        /* Progress Card */
-        .progress-card {
-            background: var(--pure-white);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 20px; padding: 2vh 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-        .progress-header, .progress-footer { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1vh; }
-        .progress-text, .last-activity { font-size: 0.85rem; color: #666; }
-        .progress-bar-container { height: 8px; background: #eee; border-radius: 10px; overflow: hidden; margin-bottom: 1vh; }
-        .progress-fill { height: 100%; background: var(--denim-blue); transition: width 1s ease; }
-        .progress-percentage { font-size: 1.2rem; color: var(--denim-blue); font-weight: bold; }
-
-        /* Menu */
-        .menu-row {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap; 
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .menu-button {
-            background: var(--denim-blue);
-            color: var(--pure-white);
-            text-decoration: none;
-            border-radius: 16px;
-            padding: 1.5vh 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1 1 calc(25% - 16px); 
-            min-width: 200px;
-            box-shadow: 0 4px 10px rgba(66, 106, 145, 0.2);
-            cursor: pointer;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .menu-button:hover:not(.locked) {
+        /* 2. JUDUL HALAMAN (KOTAK HERO) */
+        .page-title-section {
             background: var(--deep-navy);
-            box-shadow: 0 6px 15px rgba(20, 36, 58, 0.3);
+            margin: 15px 4%;
+            padding: 3vh 32px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(20, 36, 58, 0.15);
+            z-index: 8;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .page-title-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(20, 36, 58, 0.22);
+        }
+        .page-title-content { display: flex; flex-direction: column; gap: 8px; }
+        .page-title-section .badge-jp { 
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.15); 
+            padding: 6px 14px; border-radius: 20px; 
+            font-size: 0.75rem; color: var(--pure-white); font-weight: bold; 
+            backdrop-filter: blur(4px);
+        }
+        .chapter-title { font-size: 1.6rem; color: var(--pure-white); line-height: 1.2; }
+        .meeting-title { font-size: 1rem; color: var(--soft-green); font-weight: 500; }
+        .hero-icon { 
+            font-size: 4.5rem; color: var(--soft-green); opacity: 0.9; 
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .page-title-section:hover .hero-icon { transform: scale(1.1) rotate(-8deg); }
+
+        @media (max-width: 768px) {
+            .page-title-section { padding: 24px; margin: 10px 4%; }
+            .hero-icon { display: none; }
+            .chapter-title { font-size: 1.3rem; }
         }
 
-        .menu-icon { font-size: 1.8rem; color: var(--soft-green); }
-        .menu-title { font-size: 0.95rem; font-weight: 600; line-height: 1.2; }
-
-        .status-indicator {
-            margin-left: auto;
-            font-size: 1.3rem;
-            display: flex; align-items: center;
-        }
-        .status-red { color: var(--status-red); }
-        .status-yellow { color: var(--status-yellow); }
-        .status-green { color: var(--status-green); }
-        .status-locked { color: rgba(255, 255, 255, 0.5); }
-
-        .menu-button.locked { background: var(--muted-blue); cursor: not-allowed; box-shadow: none; }
-
-        @keyframes clickPop {
-            0% { transform: scale(1); }
-            50% { transform: scale(0.92); }
-            100% { transform: scale(1); }
-        }
-        .animate-click { animation: clickPop 0.3s ease-out; }
-
-        /* Footer */
-        footer { 
-            text-align: center; 
-            padding: 2vh; 
+        /* 3. NAVIGASI MENU BARIS HORIZONTAL */
+        .nav-container {
             background: var(--pure-white);
-            color: #777; 
-            border-top: 1px solid #eee; 
+            padding: 10px 2%;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            flex-shrink: 0; z-index: 5;
         }
-        .footer-title { font-weight: 600; font-size: 0.9rem; }
+        .menu-row {
+            display: flex; flex-direction: row; flex-wrap: nowrap; 
+            gap: 6px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px;
+        }
+        .menu-row::-webkit-scrollbar { display: none; }
+
+        /* GAYA TOMBOL MENU DENGAN EFEK INTERAKTIF */
+        .tab-button {
+            position: relative;
+            background: var(--pure-white); color: var(--denim-blue);
+            border: 2px solid var(--denim-blue); border-radius: 12px; 
+            padding: 8px 10px;
+            display: flex; align-items: center; gap: 6px;
+            flex: 1; min-width: fit-content; cursor: pointer;
+            overflow: hidden; /* Menahan ripple effect */
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap; justify-content: center;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Hover desktop */
+        .tab-button:hover {
+            background: var(--off-white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(66, 106, 145, 0.18);
+        }
+
+        /* Press effect saat diklik */
+        .tab-button:active {
+            transform: translateY(1px) scale(0.96);
+            box-shadow: 0 2px 6px rgba(66, 106, 145, 0.12);
+        }
+
+        .menu-icon { font-size: 1.12rem; transition: transform 0.3s ease, color 0.3s ease; }
+        .menu-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2px; }
+        .status-indicator { margin-left: 4px; font-size: 0.95rem; transition: transform 0.3s ease; }
+
+        /* MIKRO-INTERAKSI IKON KHUSUS SETIAP MENU SAAT HOVER */
+        .tab-button[data-target="atp"]:hover .menu-icon { animation: animTarget 0.5s ease; }
+        .tab-button[data-target="asesmen-awal"]:hover .menu-icon { animation: animShake 0.4s ease; }
+        .tab-button[data-target="pertanyaan-esensial"]:hover .menu-icon { animation: animTilt 0.4s ease; }
+        .tab-button[data-target="eksplorasi-konsep"]:hover .menu-icon { animation: animRaise 0.4s ease; }
+        .tab-button[data-target="for-learning"]:hover .menu-icon { animation: animGlow 0.5s ease; }
+        .tab-button[data-target="penerapan-konsep"]:hover .menu-icon { animation: animRotate 0.5s ease; }
+        .tab-button[data-target="as-learning"]:hover .menu-icon { animation: animPulse 0.6s ease infinite; }
+
+        /* STATUS MENU: SEDANG DIKERJAKAN (CYAN) */
+        .tab-button.status-progress {
+            background: var(--cyan-light);
+            color: var(--deep-navy);
+            border-color: var(--cyan-accent);
+            box-shadow: 0 0 10px var(--glow-cyan);
+        }
+        .tab-button.status-progress .menu-icon, 
+        .tab-button.status-progress .status-indicator { color: var(--cyan-accent); }
+
+        /* STATUS MENU: SELESAI (HIJAU LEMBUT) */
+        .tab-button.status-completed {
+            background: var(--soft-green);
+            color: var(--deep-navy);
+            border-color: var(--soft-green);
+            box-shadow: 0 4px 12px var(--glow-green);
+        }
+        .tab-button.status-completed .menu-icon, 
+        .tab-button.status-completed .status-indicator { 
+            color: var(--deep-navy); 
+            animation: popCheck 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* GELOMBANG RIPPLE EFFECT */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: rippleAnim 0.55s linear;
+            pointer-events: none;
+        }
+
+        /* 4. AREA KONTEN UTAMA */
+        .main-content-area { flex: 1; padding: 24px 4%; overflow-y: auto; background: var(--off-white); }
+        .tab-pane { 
+            display: none; 
+            max-width: 1400px; margin: 0 auto; 
+        }
+        
+        .tab-pane.active { 
+            display: block; 
+            animation: contentSlideUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .content-card {
+            background: var(--pure-white); border-radius: 20px;
+            padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0, 0, 0, 0.05); margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* TOMBOL AKSI DALAM KONTEN */
+        .btn-action {
+            position: relative;
+            background: var(--denim-blue); color: var(--pure-white);
+            border: none; padding: 12px 26px; border-radius: 12px;
+            font-weight: 600; font-size: 0.9rem; cursor: pointer;
+            overflow: hidden;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+            box-shadow: 0 4px 12px rgba(66, 106, 145, 0.25);
+            user-select: none;
+        }
+        .btn-action:hover { 
+            background: var(--deep-navy); 
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 16px rgba(20, 36, 58, 0.3);
+        }
+        .btn-action:active { transform: translateY(1px) scale(0.97); }
+        
+        .btn-action.success { 
+            background: var(--status-green); 
+            color: var(--deep-navy);
+            pointer-events: none; 
+            box-shadow: 0 4px 15px var(--glow-green);
+            animation: successBounce 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* KEYFRAMES & ANIMASI */
+        @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
+        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+        @keyframes contentSlideUp { from { opacity: 0; transform: translateY(16px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes popCheck { 0% { transform: scale(0) rotate(-45deg); } 70% { transform: scale(1.3) rotate(10deg); } 100% { transform: scale(1) rotate(0deg); } }
+        @keyframes successBounce { 0% { transform: scale(0.9); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
+
+        /* MIKRO-ANIMASI IKON MENU */
+        @keyframes animTarget { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+        @keyframes animShake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
+        @keyframes animTilt { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg) scale(1.15); } }
+        @keyframes animRaise { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        @keyframes animGlow { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.25); } }
+        @keyframes animRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(180deg); } }
+        @keyframes animPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        /* MENGHORMATI OPSI REDUCED MOTION AKSESIBILITAS */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
 <body>
     
-        
+    <!-- 1. HEADER -->
     <header class="top-header">
         <div class="logo-area">
             <i class="ph-fill ph-code-block logo-icon"></i>
             <div>
                 <h1>INFORMATIKA FUN!</h1>
-                <p class="tagline">Website Pembelajaran Informatika Yang Interaktif dan Menyenangkan.</p>
+                <p class="tagline">Pembelajaran Interaktif & Menyenangkan</p>
             </div>
         </div>
         <div class="user-profile">
             <div class="user-info">
                 <span class="status-dot"></span>
-                <span id="user-name" class="user-name">Memuat...</span>
+                <span id="user-name" class="user-name">Siswa Kreatif</span>
             </div>
-            <button class="btn-profile"><i class="ph ph-user-circle"></i></button>
+            <button class="btn-profile" title="Profil Siswa"><i class="ph ph-user-circle"></i></button>
         </div>
     </header>
 
-    <main class="dashboard-container">
-        <!-- AREA HERO -->
-        <section class="hero-section">
-            <div>
-                <div class="badge-jp"><i class="ph ph-clock"></i> JP: 120 MENIT</div>
-                <h2 class="hero-title">BAB I — KONSEP DAN ANALISIS DATA</h2>
-            </div>
-            <i class="ph-duotone ph-database hero-icon"></i>
-        </section>
+    <!-- 2. JUDUL HALAMAN KOTAK -->
+    <section class="page-title-section">
+        <div class="page-title-content">
+            <div class="badge-jp"><i class="ph ph-clock"></i> JP: 120 MENIT</div>
+            <h2 class="chapter-title">BAB I: Konsep dan Analisis Data Terstruktur</h2>
+            <h3 class="meeting-title">Pertemuan 1: Data Terstruktur vs. Tidak Terstruktur</h3>
+        </div>
+        <i class="ph-duotone ph-database hero-icon"></i>
+    </section>
 
-        <!-- KARTU PROGRES -->
-        <section class="progress-card">
-            <div class="progress-header">
-                <h3>PROGRES PEMBELAJARAN</h3>
-                <span id="progress-text" class="progress-text">0 dari 7 menu selesai</span>
-            </div>
-            <div class="progress-bar-container">
-                <div id="progress-fill" class="progress-fill" style="width: 0%;"></div>
-            </div>
-            <div class="progress-footer">
-                <span class="last-activity">Aktivitas terakhir: <span id="last-activity-text">Memuat...</span></span>
-                <span id="progress-percentage" class="progress-percentage">0%</span>
-            </div>
-        </section>
+    <!-- 3. MENU NAVIGASI HORIZONTAL -->
+    <nav class="nav-container">
+        <div id="menu-row" class="menu-row"></div>
+    </nav>
 
-        <!-- AREA MENU -->
-        <section id="menu-row" class="menu-row">
-            <!-- JavaScript mengisi menu di sini -->
-        </section>
+    <!-- 4. AREA KONTEN UTAMA -->
+    <main class="main-content-area">
+        <div id="content-container"></div>
     </main>
 
-    <!-- FOOTER -->
-    <footer>
-        <p class="footer-title">INFORMATIKA FUN @ By: Riski Amalia, S.Pd.</p>
-    </footer>
-
     <script>
+        const currentUser = "SiswaKreatif_Kelas7A";
+        const storageKey = `progress_Informatika_${currentUser}`;
+
         const learningMenus = [
-            // Isi tautan (url) kamu di dalam tanda kutip di bawah ini
-            { id: "atp", title: "ATP", icon: "ph-target", url: "" },
-            { id: "asesmen-awal", title: "Asesmen Awal", icon: "ph-clipboard-text", url: "" },
-            { id: "pertanyaan-esensial", title: "Pertanyaan Esensial", icon: "ph-lightbulb", url: "" },
-            { id: "eksplorasi-konsep", title: "Eksplorasi Konsep", icon: "ph-folders", url: "" },
-            { id: "for-learning", title: "For Learning", icon: "ph-compass", url: "" },
-            { id: "penerapan-konsep", title: "Penerapan Konsep", icon: "ph-app-window", url: "" },
-            { id: "as-learning", title: "As Learning", icon: "ph-chart-line-up", url: "" }
+            { id: "atp", title: "ATP", icon: "ph-target", type: "read" },
+            { id: "asesmen-awal", title: "ASESMEN AWAL", icon: "ph-clipboard-text", type: "task" },
+            { id: "pertanyaan-esensial", title: "PERTANYAAN ESENSIAL", icon: "ph-question", type: "read" },
+            { id: "eksplorasi-konsep", title: "EKSPLORASI KONSEP", icon: "ph-folders", type: "read" },
+            { id: "for-learning", title: "FOR LEARNING", icon: "ph-lightbulb", type: "task" },
+            { id: "penerapan-konsep", title: "PENERAPAN KONSEP", icon: "ph-wrench", type: "task" },
+            { id: "as-learning", title: "AS LEARNING", icon: "ph-brain", type: "task" }
         ];
 
-        let userProgress = {
-            "atp": { status: "green" }, 
-            "asesmen-awal": { status: "yellow" }, 
-            "pertanyaan-esensial": { status: "red" } 
-        };
+        let userProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
 
-        function renderMenus() {
-            const container = document.getElementById("menu-row");
-            container.innerHTML = "";
-            let completedCount = 0;
+        function initApp() {
+            const menuContainer = document.getElementById("menu-row");
+            const contentContainer = document.getElementById("content-container");
+            
+            menuContainer.innerHTML = "";
+            contentContainer.innerHTML = "";
 
-            learningMenus.forEach((menu, index) => {
-                const progress = userProgress[menu.id] || { status: "red" };
-                let isLocked = false;
+            learningMenus.forEach((menu) => {
+                const currentStatus = userProgress[menu.id] || "unstarted";
+
+                // Membuat Tombol Tab Menu
+                const btn = document.createElement("button");
+                btn.id = `btn-${menu.id}`;
+                btn.className = "tab-button";
+                btn.dataset.target = menu.id;
                 
-                if (index > 0) {
-                    const prevMenu = learningMenus[index - 1];
-                    const prevProgress = userProgress[prevMenu.id] || { status: "red" };
-                    if (prevProgress.status !== "green") isLocked = true;
-                }
+                updateButtonVisuals(btn, menu, currentStatus);
 
-                if (progress.status === "green") completedCount++;
+                // Efek Ripple Efek Saat Diklik/Disentuh
+                btn.addEventListener("click", function(e) {
+                    createRipple(e, this);
+                });
 
-                let statusIconHTML = "";
-                if (isLocked) {
-                    statusIconHTML = `<i class="ph-fill ph-lock-key status-locked"></i>`;
-                } else if (progress.status === "green") {
-                    statusIconHTML = `<i class="ph-fill ph-check-circle status-green"></i>`;
-                } else if (progress.status === "yellow") {
-                    statusIconHTML = `<i class="ph-fill ph-clock-countdown status-yellow"></i>`;
-                } else {
-                    statusIconHTML = `<i class="ph-fill ph-play-circle status-red"></i>`;
-                }
-
-                const btn = document.createElement("a");
-                btn.href = isLocked ? "#" : (menu.url !== "" ? menu.url : "#");
-                btn.className = `menu-button ${isLocked ? "locked" : ""}`;
+                // Membuat Panel Konten
+                const pane = document.createElement("div");
+                pane.id = `pane-${menu.id}`;
+                pane.className = "tab-pane";
                 
-                if (!isLocked && menu.url !== "") {
-                    btn.target = "_blank";
-                }
-
-                btn.innerHTML = `
-                    <i class="ph-duotone ${menu.icon} menu-icon"></i>
-                    <span class="menu-title">${menu.title}</span>
-                    <div class="status-indicator">
-                        ${statusIconHTML}
+                let actionButtonText = menu.type === "read" ? "Tandai Selesai Dibaca" : "Kirim Jawaban Tugas";
+                
+                pane.innerHTML = `
+                    <div class="content-card">
+                        <i class="ph-duotone ${menu.icon}" style="font-size: 3rem; color: var(--denim-blue); margin-bottom: 12px; display: inline-block;"></i>
+                        <h2>Area Pembelajaran: ${menu.title}</h2>
+                        <p style="margin-top: 12px; color: #555; line-height: 1.6;">
+                            Selamat datang di bagian <strong>${menu.title}</strong>. Ruang konten ini siap diisi dengan materi pembelajaran, modul, video interaktif, maupun formulir kuis online.
+                        </p>
+                        <br>
+                        <button id="action-${menu.id}" class="btn-action ${currentStatus === 'completed' ? 'success' : ''}">
+                            <i class="ph-bold ${currentStatus === 'completed' ? 'ph-check' : 'ph-paper-plane-right'}"></i> 
+                            ${currentStatus === 'completed' ? 'Selesai Dikerjakan' : actionButtonText}
+                        </button>
                     </div>
                 `;
 
-                btn.addEventListener("click", function(e) {
-                    this.classList.add("animate-click");
-                    setTimeout(() => { this.classList.remove("animate-click"); }, 300);
+                // Navigasi Tab & Pembaruan Status Realtime
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active-tab"));
+                    document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
+                    
+                    btn.classList.add("active-tab");
+                    document.getElementById(`pane-${menu.id}`).classList.add("active");
 
-                    if (isLocked) {
-                        e.preventDefault();
-                        alert("Selesaikan aktivitas sebelumnya terlebih dahulu.");
-                    } else if (menu.url === "") {
-                        e.preventDefault();
-                        setTimeout(() => alert("Halaman belum dihubungkan."), 100); 
+                    // Ubah status ke progress jika baru pertama dibuka
+                    if ((userProgress[menu.id] || "unstarted") === "unstarted") {
+                        saveProgress(menu.id, "progress");
+                        updateButtonVisuals(btn, menu, "progress");
                     }
                 });
 
-                container.appendChild(btn);
+                menuContainer.appendChild(btn);
+                contentContainer.appendChild(pane);
+
+                // Penanganan Tombol Aksi Selesai/Kirim
+                const actionBtn = document.getElementById(`action-${menu.id}`);
+                actionBtn.addEventListener("click", function(e) {
+                    createRipple(e, this);
+                    this.classList.add("success");
+                    this.innerHTML = `<i class="ph-bold ph-check"></i> Selesai Dikerjakan`;
+                    
+                    saveProgress(menu.id, "completed");
+                    updateButtonVisuals(btn, menu, "completed");
+                });
             });
 
-            const percentage = Math.round((completedCount / learningMenus.length) * 100);
-            document.getElementById("progress-fill").style.width = `${percentage}%`;
-            document.getElementById("progress-percentage").innerText = `${percentage}%`;
-            document.getElementById("progress-text").innerText = `${completedCount} dari ${learningMenus.length} menu selesai`;
+            // Otomatis buka tab pertama saat aplikasi dimuat
+            const firstButton = document.getElementById(`btn-${learningMenus[0].id}`);
+            if(firstButton) firstButton.click();
         }
 
-        function initApp() {
-            document.getElementById("user-name").innerText = "Siswa Kreatif";
-            document.getElementById("last-activity-text").innerText = "Asesmen Awal";
-            renderMenus();
+        // Efek Ripple
+        function createRipple(event, element) {
+            const circle = document.createElement("span");
+            const diameter = Math.max(element.clientWidth, element.clientHeight);
+            const radius = diameter / 2;
+            const rect = element.getBoundingClientRect();
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - rect.left - radius}px`;
+            circle.style.top = `${event.clientY - rect.top - radius}px`;
+            circle.classList.add("ripple");
+
+            const ripple = element.getElementsByClassName("ripple")[0];
+            if (ripple) ripple.remove();
+
+            element.appendChild(circle);
+        }
+
+        // Fungsi Pembaru Visual Tombol secara Realtime
+        function updateButtonVisuals(btn, menu, status) {
+            btn.classList.remove("status-progress", "status-completed");
+            let statusIcon = "ph-circle"; 
+            
+            if (status === "progress") {
+                btn.classList.add("status-progress");
+                statusIcon = "ph-spinner-gap ph-spin"; 
+            } else if (status === "completed") {
+                btn.classList.add("status-completed");
+                statusIcon = "ph-check-circle"; 
+            }
+
+            btn.innerHTML = `
+                <i class="ph-duotone ${menu.icon} menu-icon"></i>
+                <span class="menu-title">${menu.title}</span>
+                <i class="ph-bold ${statusIcon} status-indicator"></i>
+            `;
+        }
+
+        // Fungsi Simpan ke LocalStorage
+        function saveProgress(menuId, status) {
+            userProgress[menuId] = status;
+            localStorage.setItem(storageKey, JSON.stringify(userProgress));
         }
 
         document.addEventListener("DOMContentLoaded", initApp);
