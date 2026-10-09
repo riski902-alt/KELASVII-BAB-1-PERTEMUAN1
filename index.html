@@ -32,7 +32,7 @@
         .menu-title, .user-name, .btn-action { font-family: 'Plus Jakarta Sans', sans-serif; }
         .hidden { display: none !important; }
 
-        /* STYLE HALAMAN LOGIN */
+        /* TAMPILAN HALAMAN LOGIN */
         #login-container {
             background: linear-gradient(135deg, #F7FBFF 0%, #AFC9D8 50%, #B7D8C8 100%);
             min-height: 100vh;
@@ -91,7 +91,7 @@
         .footer-title { font-size: 12px; font-weight: 800; color: #314F68; }
         .footer-desc { font-size: 11px; color: #6F91AA; margin-top: 2px; }
 
-        /* STYLE DASHBOARD UTAMA */
+        /* TAMPILAN DASHBOARD MATERI */
         #dashboard-container { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
         .top-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 4%; background: var(--pure-white); border-bottom: 1px solid rgba(0, 0, 0, 0.05); flex-shrink: 0; z-index: 10; }
         .logo-area { display: flex; align-items: center; gap: 10px; }
@@ -249,19 +249,19 @@
         </main>
     </div>
 
-    <!-- SCRIPT FIREBASE & UTAMA -->
+    <!-- LOGIKA JAVASCRIPT & FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, collection, query, where, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyB7bt1JBOXkh81nYk8sVkuFpSmuJ3kOj94",[cite: 7]
-            authDomain: "databasemateriinformatika.firebaseapp.com",[cite: 7]
-            projectId: "databasemateriinformatika",[cite: 7]
-            storageBucket: "databasemateriinformatika.firebasestorage.app",[cite: 7]
-            messagingSenderId: "961327810612",[cite: 7]
-            appId: "1:961327810612:web:48e952f20159a5b932e261",[cite: 7]
+            apiKey: "AIzaSyB7bt1JBOXkh81nYk8sVkuFpSmuJ3kOj94",
+            authDomain: "databasemateriinformatika.firebaseapp.com",
+            projectId: "databasemateriinformatika",
+            storageBucket: "databasemateriinformatika.firebasestorage.app",
+            messagingSenderId: "961327810612",
+            appId: "1:961327810612:web:48e952f20159a5b932e261",
             measurementId: "G-TDZQZ9L36B"
         };
 
@@ -287,6 +287,9 @@
         const loginContainer = document.getElementById('login-container');
         const dashboardContainer = document.getElementById('dashboard-container');
         const userNameDisplay = document.getElementById('user-name');
+        const loginForm = document.getElementById('loginForm');
+        const statusDiv = document.getElementById('statusMessage');
+        const btnLogin = document.getElementById('btnLogin');
 
         function createRipple(event, element) {
             const circle = document.createElement("span");
@@ -408,6 +411,7 @@
             if (firstButton) firstButton.click();
         }
 
+        // Cek login otomatis saat halaman dimuat
         if (currentUser && currentNISN) {
             loginContainer.classList.add('hidden');
             dashboardContainer.classList.remove('hidden');
@@ -415,11 +419,10 @@
             mulaiAplikasi();
         }
 
+        // Peran Siswa/Guru
         const roleInputs = document.querySelectorAll('input[name="userRole"]');
         const siswaSection = document.getElementById('siswaSection');
         const guruSection = document.getElementById('guruSection');
-        const statusDiv = document.getElementById('statusMessage');
-        const btnLogin = document.getElementById('btnLogin');
 
         function showStatus(message, type) {
             statusDiv.innerText = message;
@@ -440,8 +443,10 @@
             });
         });
 
-        btnLogin.addEventListener('click', async (event) => {
-            event.preventDefault();
+        // PENANGANAN UTAMA FORM SUBMIT
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Menghentikan pengisian/reload form bawaan HTML
+            
             const selectedRole = document.querySelector('input[name="userRole"]:checked').value;
 
             if (selectedRole === 'siswa') {
@@ -453,30 +458,34 @@
                     return;
                 }
 
+                btnLogin.innerText = "Memeriksa...";
                 showStatus('Memeriksa data siswa ke database...', 'success');
 
                 try {
-                    // Pencarian Serbaguna (NISN sebagai Teks & Angka, serta 'NISN' & 'nisn')
                     let docs = [];
                     const nisnStr = nisnInput;
                     const nisnNum = Number(nisnInput);
 
+                    // Pengecekan 1: NISN Teks
                     let q1 = query(collection(db, "siswa"), where("NISN", "==", nisnStr));
                     let snap1 = await getDocs(q1);
                     snap1.forEach(d => docs.push(d.data()));
 
+                    // Pengecekan 2: NISN Angka
                     if (docs.length === 0 && !isNaN(nisnNum)) {
                         let q2 = query(collection(db, "siswa"), where("NISN", "==", nisnNum));
                         let snap2 = await getDocs(q2);
                         snap2.forEach(d => docs.push(d.data()));
                     }
 
+                    // Pengecekan 3: nisn Teks (huruf kecil)
                     if (docs.length === 0) {
                         let q3 = query(collection(db, "siswa"), where("nisn", "==", nisnStr));
                         let snap3 = await getDocs(q3);
                         snap3.forEach(d => docs.push(d.data()));
                     }
 
+                    // Pengecekan 4: nisn Angka (huruf kecil)
                     if (docs.length === 0 && !isNaN(nisnNum)) {
                         let q4 = query(collection(db, "siswa"), where("nisn", "==", nisnNum));
                         let snap4 = await getDocs(q4);
@@ -484,19 +493,25 @@
                     }
 
                     if (docs.length === 0) {
-                        showStatus('NISN tidak ditemukan di koleksi "siswa".', 'error');
+                        btnLogin.innerText = "LOGIN";
+                        showStatus('NISN "' + nisnInput + '" tidak terdaftar di database.', 'error');
                         return;
                     }
 
                     let siswaCocok = false;
+                    let namaDiDatabase = "";
+
                     docs.forEach((data) => {
                         for (let kolom in data) {
                             let namaKolomBersih = kolom.trim().toLowerCase().replace(/_/g, "");
                             if (namaKolomBersih.includes("nama")) {
                                 let isiNamaDatabase = data[kolom];
-                                if (typeof isiNamaDatabase === "string" && isiNamaDatabase.trim().toLowerCase() === namaInput.toLowerCase()) {
-                                    siswaCocok = true;
-                                    break; 
+                                if (typeof isiNamaDatabase === "string") {
+                                    namaDiDatabase = isiNamaDatabase;
+                                    if (isiNamaDatabase.trim().toLowerCase() === namaInput.toLowerCase()) {
+                                        siswaCocok = true;
+                                        break; 
+                                    }
                                 }
                             }
                         }
@@ -516,14 +531,16 @@
                             loginContainer.classList.add('hidden');
                             dashboardContainer.classList.remove('hidden');
                             mulaiAplikasi();
-                        }, 800);
+                        }, 500);
                         
                     } else {
-                        showStatus('Nama tidak cocok dengan NISN yang terdaftar.', 'error');
+                        btnLogin.innerText = "LOGIN";
+                        showStatus('Nama "' + namaInput + '" tidak cocok dengan NISN tersebut. (Nama terdaftar: ' + (namaDiDatabase || "tidak ditemukan") + ')', 'error');
                     }
 
                 } catch (error) {
                     console.error("Error Database:", error);
+                    btnLogin.innerText = "LOGIN";
                     showStatus('Kendala Firebase: ' + error.message, 'error');
                 }
 
@@ -535,6 +552,7 @@
                     showStatus('Email dan password belum diisi.', 'error');
                     return;
                 }
+                btnLogin.innerText = "Memeriksa...";
                 showStatus('Memeriksa akun Guru...', 'success');
 
                 signInWithEmailAndPassword(auth, emailInput, passwordInput)
@@ -545,6 +563,7 @@
                     }, 1000);
                 })
                 .catch((error) => {
+                    btnLogin.innerText = "LOGIN";
                     showStatus('Login Guru gagal: ' + error.message, 'error');
                 });
             }
