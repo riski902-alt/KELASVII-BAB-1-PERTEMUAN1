@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informatika Fun! - Dashboard Pembelajaran Interaktif</title>
     
+    <!-- Panggil script pengecekan login -->
+<script src="cek-login.js"></script>
+    
     <!-- Memuat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
@@ -227,7 +230,9 @@
                     <span class="status-dot"></span>
                     <span id="user-name" class="user-name">Siswa</span>
                 </div>
-                <button class="btn-profile" title="Profil Siswa"><i class="ph ph-user-circle"></i></button>
+                <button id="btnLogout" class="btn-profile" title="Keluar / Ganti Akun" style="color: #e63946;">
+    <i class="ph ph-sign-out"></i>
+</button>
             </div>
         </header>
 
@@ -568,6 +573,30 @@
                 });
             }
         });
+        // Mengambil elemen tombol logout
+const btnLogout = document.getElementById('btnLogout');
+
+if (btnLogout) {
+    btnLogout.addEventListener('click', () => {
+        // Konfirmasi sebelum keluar agar tidak tidak sengaja terpencet
+        const konfirmasi = confirm("Apakah kamu yakin ingin keluar dan mengganti akun?");
+        
+        if (konfirmasi) {
+            // Menghapus data login dari memori browser
+            localStorage.removeItem('infoFun_Nama');
+            localStorage.removeItem('infoFun_NISN');
+            
+            // Menyembunyikan dashboard dan menampilkan halaman login kembali
+            dashboardContainer.classList.add('hidden');
+            loginContainer.classList.remove('hidden');
+            
+            // Mengosongkan form login
+            document.getElementById('nama').value = '';
+            document.getElementById('nisn').value = '';
+            document.getElementById('statusMessage').style.display = 'none';
+        }
+    });
+}
     </script>
 </body>
 </html>
