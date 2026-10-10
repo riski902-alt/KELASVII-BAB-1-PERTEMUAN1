@@ -1,0 +1,47 @@
+{
+  "pertemuan-1": {
+    "judul_bab": "BAB I: Konsep dan Analisis Data Terstruktur",
+    "judul_pertemuan": "Pertemuan 1: Data Terstruktur vs. Tidak Terstruktur",
+    "konten": {
+      "atp": "<h3>Tujuan Pembelajaran</h3><p>Murid mampu memahami konsep himpunan data terstruktur dalam kehidupan sehari-hari.</p>",
+      "asesmen-awal": "<h3>Asesmen Awal</h3><p>Kerjakan soal di link berikut...</p>",
+      "eksplorasi-konsep": "<h3>Materi Hari Ini</h3><p>Berikut adalah penjelasan mengenai data...</p>"
+    }
+  },
+  "pertemuan-2": {
+    "judul_bab": "BAB I: Konsep dan Analisis Data Terstruktur",
+    "judul_pertemuan": "Pertemuan 2: Pengidentifikasian dan Pemodelan Data Terstruktur di Kehidupan Sehari-hari ",
+    "konten": {
+      "atp": "<h3>Tujuan Pembelajaran 2</h3><p>Murid mampu memahami konsep himpunan data terstruktur dalam kehidupan sehari-hari.</p>",
+      "asesmen-awal": "<h3>Asesmen Awal 2</h3><p>Kerjakan soal berikut...</p>",
+      "eksplorasi-konsep": "<h3>Materi Tipe Data</h3><p>Tipe data terdiri dari...</p>"
+    }
+  },
+  "pertemuan-3": {
+    "judul_bab": "BAB I: Konsep dan Analisis Data Terstruktur",
+    "judul_pertemuan": "Pertemuan 3: Antarmuka dan Elemen Dasar Lembar Kerja Pengolah Data (Spreadsheet)",
+    "konten": {
+      "atp": "<h3>Tujuan Pembelajaran</h3><p>Murid mampu memahami konsep lembar kerja pengolah data.</p>",
+      "asesmen-awal": "<h3>Asesmen Awal</h3><p>Kerjakan soal di link berikut...</p>",
+      "eksplorasi-konsep": "<h3>Materi Hari Ini</h3><p>Berikut adalah penjelasan mengenai data...</p>"
+    }
+  },
+  "pertemuan-4": {
+    "judul_bab": "BAB I: Konsep dan Analisis Data Terstruktur",
+    "judul_pertemuan": "Pertemuan 4: Pengolahan dan Pengorganisasian Data ",
+    "konten": {
+      "atp": "<h3>Tujuan Pembelajaran 2</h3><p>Murid mampu memahami konsep lembar kerja pengolah data.</p>",
+      "asesmen-awal": "<h3>Asesmen Awal 2</h3><p>Kerjakan soal berikut...</p>",
+      "eksplorasi-konsep": "<h3>Materi Tipe Data</h3><p>Tipe data terdiri dari...</p>"
+    }
+  },
+  "pertemuan-5": {
+    "judul_bab": "BAB I: Konsep dan Analisis Data Terstruktur",
+    "judul_pertemuan": "Pertemuan 5: Praktik Analisis dan Pengolahan Data Sederhana",
+    "konten": {
+      "atp": "<h3>Tujuan Pembelajaran 2</h3><p>Murid mampu menerapkan konsep data terstruktur dan penggunaan lembar kerja secara mandiri.</p>",
+      "asesmen-awal": "<h3>Asesmen Awal 2</h3><p>Kerjakan soal berikut...</p>",
+      "eksplorasi-konsep": "<h3>Materi Tipe Data</h3><p>Tipe data terdiri dari...</p>"
+    }
+  }
+}
